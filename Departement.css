@@ -1,0 +1,80 @@
+path {
+  fill: #ff8c00;
+  stroke: #34344a;
+}
+
+path:hover {
+  fill: #b33f62;
+  cursor: pointer;
+}
+
+* {
+  color: whitesmoke;
+  font-family: "Inter", sans-serif;
+}
+
+#zoneAffichage,
+h1,
+#chronometre,
+#consigne,
+footer,
+#affichageScore,
+body,
+select,
+button {
+  text-align: center;
+  background-color: #3891a6;
+}
+
+#carteGlobale {
+  display: flex;
+  justify-content: center;
+}
+
+#carteGlobale {
+  border: 2px solid;
+  border-radius: 50px 10px;
+  padding: 20px;
+  margin: 10px;
+}
+
+#zoneScore {
+  font-size: 300%;
+}
+
+#questionDepartement,
+#questionNumero,
+#questionPrefecture {
+  display: grid;
+  grid-template-columns: repeat(3, 20%); /* Trois colonnes de largeur égale */
+  grid-template-rows: 1fr;
+  row-gap: 10px;
+  justify-content: center; /* Centrer les colonnes horizontalement */
+}
+
+#bulleInfo {
+  background-color: #b33f62;
+  display: none;
+  position: fixed;
+  border: 2px solid;
+  border-radius: 50px 10px;
+  padding: 20px;
+  z-index: 1000;
+}
+
+#questions {
+  border: 2px solid;
+  border-radius: 50px 10px;
+  padding: 20px;
+  margin: 10px;
+}
+
+#zoneQCM {
+  display: none;
+}
+
+#consigne {
+  font-size: larger;
+  font-weight: bold;
+  color: #b33f62;
+}

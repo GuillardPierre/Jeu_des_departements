@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Departement.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="scripts/listeDepartements.js" defer></script>
+    <script src="scripts/popup.js" defer></script>
+    <script src="scripts/listes dep.js" defer></script>
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/QCM.js" defer></script>
+    
+  </head>
+
+  <header><h1>Bienvenue sur le jeu des départements !</h1></header>
+
+  <body>
+    <p id="consigne">
+      Clique sur le département demandé le plus rapidement possible.
+    </p>
+    <select name="Mode de Jeu" id="menuDeroulant">
+      <option value="choix" selected>Choisissez un mode de jeu</option>
+      <option value="trouve">Trouve le département</option>
+      <option value="QCM">QCM connaissances</option>
+    </select>
+    <div id="chronometre">00:00:00</div>
+
+    <div id="zoneAffichage">
+      <button id="lancementJeu">Lancer le jeu</button>
+    </div>
+
+    <div id="carteGlobale">
+    </div>
+
+    <div id="zoneQCM">
+      <div id="questions">
+        <div id="consigne">Coche les bonnes réponses pour gagner des points ! (2 bonnes réponses minimum = 1 point)</div>
+        <form>
+        <div id="questionDepartement">
+          <div>
+            <label
+              ><input type="radio" name="radio" id="btn1" /><span id="exemple1">1</span
+            ></label>
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="radio" id="btn2" /><span id="exemple2">2</span
+            ></label>
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="radio" id="btn3" /><span id="exemple3">3</span
+            ></label>
+          </div></div>
+        </form>
+      <form>
+  
+        <div id="questionNumero">
+          
+          <div>
+            <label
+              ><input type="radio" name="radio" id="btn4" /><span id="exemple4"></span
+            ></label>
+          </div>
+        <div>
+            <label
+              ><input type="radio" name="radio" id="btn5" /><span id="exemple5"></span
+            ></label>
+        </div>
+        <div>
+            <label
+              ><input type="radio" name="radio" id="btn6" /><span id="exemple6"></span
+            ></label>
+        </div></div>
+      </form>
+      <form>
+        <div id="questionPrefecture">
+          <div>
+              <label
+                ><input type="radio" name="radio" id="btn7" /><span id="exemple7"></span
+              ></label>
+          </div>
+          <div>
+              <label
+                ><input type="radio" name="radio" id="btn8"/><span id="exemple8"></span
+              ></label>
+          </div>
+        <div>
+          <label
+            ><input type="radio" name="radio" id="btn9" /><span id="exemple9"></span
+          ></label>
+      </div>
+        
+      </form>
+      </div>
+    
+    <div><button id="btnEnvoyerReponse">Envoyer</button></div></div></div>  
+    <div id="affichageScore"><span id="zoneScore">0</span> / 97</div>
+
+    <div id="bulleInfo">
+      <ul>
+        <li>département = <span id="nom">..</span></li>
+        <li>numéro = <span id="numero">..</span></li>
+        <li>préfecture = <span id="prefecture">..</span></li>
+      </ul>
+    </div>
+  </body>
+
+    
+  
+
+    
+
+  <footer>
+    <p>Projet réalisé par Pierre Guillard</p>
+    <p>Débuté le 01/09/2023</p>
+  </footer>
+</html>
