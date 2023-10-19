@@ -5,6 +5,7 @@ let btnLancerLeJeu = document.getElementById("lancementJeu");
 let chrono = document.getElementById("chronometre");
 let consigne = document.getElementById("consigne");
 let modeDeJeu = document.getElementById("menuDeroulant");
+let btnsAccueil = document.querySelectorAll(".retourAccueil");
 let departementCache = "";
 let departementAColore = "";
 let nombreHasard;
@@ -73,14 +74,12 @@ function verifChoixJoueur(cliqueJoueur) {
     zoneScore.innerHTML = score;
     departementAColore = document.getElementById(departementCache);
     departementAColore.style.fill = "green";
-    console.log(departementsFrancais.length);
     listeTemporaire.splice(nombreHasard, 1);
     nouvelleManche();
     // lancerJeu();
   } else if (cliqueJoueur != departementCache && jeuLance === true) {
     departementAColore = document.getElementById(departementCache);
     departementAColore.style.fill = "red";
-    console.log(departementsFrancais.length);
     listeTemporaire.splice(nombreHasard, 1);
     nouvelleManche();
     // lancerJeu();
