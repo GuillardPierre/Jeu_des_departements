@@ -5,7 +5,7 @@ let btnLancerLeJeu = document.getElementById("lancementJeu");
 let chrono = document.getElementById("chronometre");
 let consigne = document.getElementById("consigne");
 let modeDeJeu = document.getElementById("menuDeroulant");
-let btnsAccueil = document.querySelectorAll(".retourAccueil");
+let btnsAccueil = document.querySelector(".retourAccueil");
 let popup = document.querySelector(".popup");
 let popupMessage = document.querySelector(".popup p");
 let btnOk = document.querySelector(".ok");
@@ -24,6 +24,7 @@ chrono.style.display = "none";
 consigne.style.display = "none";
 btnLancerLeJeu.style.display = "none";
 popup.style.display = "none";
+btnsAccueil.style.display = "none";
 
 function rechargementListes() {
   // permet lors d'un lancement de jeu de charger des listes provisoires.
@@ -41,21 +42,20 @@ modeDeJeu.addEventListener("change", (e) => {
   // choix du mode de jeu
   choixModeDeJeu = modeDeJeu.value;
   if (choixModeDeJeu === "trouve") {
+    rechargementListes();
     chrono.style.display = "inline";
     consigne.style.display = "inline";
     btnLancerLeJeu.style.display = "inline";
     modeDeJeu.style.display = "none";
     aideAffiche = false;
-    rechargementListes();
+    btnsAccueil.style.display = "inline";
   } else if (choixModeDeJeu === "QCM") {
     rechargementListes();
     aideAffiche = false;
     zoneQuestionQCM.style.display = "inline";
     modeDeJeu.style.display = "none";
+    btnsAccueil.style.display = "inline";
     lancementQCM();
-  } else if (choixModeDeJeu === choix) {
-    btnsAccueil.style.display = "none";
-    aideAffiche = true;
   }
 });
 
@@ -92,13 +92,11 @@ function verifChoixJoueur(cliqueJoueur) {
     departementAColore.style.fill = "green";
     listeTemporaire.splice(nombreHasard, 1);
     departementAuHasard();
-    // lancerJeu();
   } else if (cliqueJoueur != departementCache && jeuLance === true) {
     departementAColore = document.getElementById(departementCache);
     departementAColore.style.fill = "red";
     listeTemporaire.splice(nombreHasard, 1);
     departementAuHasard();
-    // lancerJeu();
   }
 }
 
@@ -206,39 +204,38 @@ for (let i = 0; i < carteCliquable.length; i++) {
   });
 }
 
-btnsAccueil.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if ((popup.style.display = "inline")) {
-      popup.style.display = "none";
-    }
-    minutes = 0;
-    secondes = 0;
-    heures = 0;
-    timeout;
-    estArrete = true;
-    chrono.textContent = `${heures}:${minutes}:${secondes}`;
-    zoneAffichage.innerHTML = "";
-    score = 0;
-    zoneScore.innerHTML = score;
-    jeuLance = false;
-    if (choixModeDeJeu === "trouve") {
-      chrono.style.display = "none";
-      consigne.style.display = "none";
-      btnLancerLeJeu.style.display = "none";
-      modeDeJeu.style.display = "inline";
-      aideAffiche = true;
-    } else if (choixModeDeJeu === "QCM") {
-      aideAffiche = false;
-      zoneQuestionQCM.style.display = "none";
-      modeDeJeu.style.display = "inline";
-      listeNombresInterdits = [];
-      aideAffiche = true;
-    }
-    AllDepartements.forEach((element) => {
-      element.style.fill = "#ff8c00";
-    });
-    modeDeJeu.value = "choix";
+btnsAccueil.addEventListener("click", () => {
+  btnsAccueil.style.display = "none";
+  if ((popup.style.display = "inline")) {
+    popup.style.display = "none";
+  }
+  minutes = 0;
+  secondes = 0;
+  heures = 0;
+  timeout;
+  estArrete = true;
+  chrono.textContent = `${heures}:${minutes}:${secondes}`;
+  zoneAffichage.innerHTML = "";
+  score = 0;
+  zoneScore.innerHTML = score;
+  jeuLance = false;
+  if (choixModeDeJeu === "trouve") {
+    chrono.style.display = "none";
+    consigne.style.display = "none";
+    btnLancerLeJeu.style.display = "none";
+    modeDeJeu.style.display = "inline";
+    aideAffiche = true;
+  } else if (choixModeDeJeu === "QCM") {
+    aideAffiche = false;
+    zoneQuestionQCM.style.display = "none";
+    modeDeJeu.style.display = "inline";
+    listeNombresInterdits = [];
+    aideAffiche = true;
+  }
+  AllDepartements.forEach((element) => {
+    element.style.fill = "#ff8c00";
   });
+  modeDeJeu.value = "choix";
 });
 
 btnOk.addEventListener("click", () => {
@@ -247,8 +244,10 @@ btnOk.addEventListener("click", () => {
 
 const AllDepartements = document.querySelectorAll("path[numero]");
 
-document.addEventListener("keydown", function (event) {
-  if (event.keyCode === 13) {
-    popup.style.display = "none";
-  }
-});
+// document.addEventListener("keydown", function (event) {
+//   if (event.keyCode === 13) {
+//     popup.style.display = "none";
+//   }
+// });
+
+//bug lors du QCM = si appuie sur enter la popup ne disparait pas et à la place il valide le QCM suivant.
