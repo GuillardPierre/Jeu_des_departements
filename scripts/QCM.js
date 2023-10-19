@@ -47,8 +47,6 @@ function elementEstDansTableau(nombre, tableau) {
   return false;
 }
 
-console.log(nombreAuPifSansInterdit(3, [0, 2]));
-
 //     if (nombre === liste[i]) {
 //       return nombreAuPifSansInterdit(max, liste);
 //     }
@@ -64,7 +62,7 @@ function lancementQCM() {
     zoneQuestionQCM.style.display = "none";
   } else {
     nombreAuPif = nombreAuPifSansInterdit(
-      listeDepartements.length,
+      listeTemporaire.length,
       listeNombresInterdits
     );
     console.log(nombreAuPif);
@@ -191,8 +189,8 @@ function verifChoixJoueurQCM() {
     );
   }
   if (point >= 2) {
-    for (let i = 0; i < departementsFrancais.length; i++) {
-      if (departementATrouver === departementsFrancais[i]) {
+    for (let i = 0; i < listeTemporaire.length; i++) {
+      if (departementATrouver === listeTemporaire[i]) {
         departementAColore = document.getElementById(departementATrouver);
         departementAColore.style.fill = "green";
         score++;
@@ -200,8 +198,8 @@ function verifChoixJoueurQCM() {
       }
     }
   } else {
-    for (let i = 0; i < departementsFrancais.length; i++) {
-      if (departementATrouver === departementsFrancais[i]) {
+    for (let i = 0; i < listeTemporaire.length; i++) {
+      if (departementATrouver === listeTemporaire[i]) {
         departementAColore = document.getElementById(departementATrouver);
         departementAColore.style.fill = "red";
       }

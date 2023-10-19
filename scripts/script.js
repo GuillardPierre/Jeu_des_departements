@@ -6,8 +6,10 @@ let chrono = document.getElementById("chronometre");
 let consigne = document.getElementById("consigne");
 let modeDeJeu = document.getElementById("menuDeroulant");
 let btnsAccueil = document.querySelectorAll(".retourAccueil");
+let popup = document.querySelector(".popup");
 let departementCache = "";
 let departementAColore = "";
+let choixModeDeJeu = "";
 let nombreHasard;
 let jeuLance = false;
 let score = 0;
@@ -15,11 +17,14 @@ let aideAffiche = true;
 let listeTemporaire = [];
 let listeTemporaireNumero = [];
 let listeTemporairePrefecture = [];
+modeDeJeu.value = "choix";
 chrono.style.display = "none";
 consigne.style.display = "none";
 btnLancerLeJeu.style.display = "none";
+popup.style.display = "none";
 
 function rechargementListes() {
+  // permet lors d'un lancement de jeu de charger des listes provisoires.
   listeTemporaire = [];
   listeTemporaireNumero = [];
   listeTemporairePrefecture = [];
@@ -32,12 +37,13 @@ function rechargementListes() {
 
 modeDeJeu.addEventListener("change", (e) => {
   // choix du mode de jeu
-  let choixModeDeJeu = modeDeJeu.value;
+  choixModeDeJeu = modeDeJeu.value;
   if (choixModeDeJeu === "trouve") {
     chrono.style.display = "inline";
     consigne.style.display = "inline";
     btnLancerLeJeu.style.display = "inline";
     modeDeJeu.style.display = "none";
+    rechargementListes();
   } else if (choixModeDeJeu === "QCM") {
     rechargementListes();
     aideAffiche = false;
@@ -60,14 +66,18 @@ for (let i = 0; i < carteCliquable.length; i++) {
 }
 
 function departementAuHasard() {
-  nombreHasard = getRandomInt(listeTemporaire.length);
-  console.log(nombreHasard);
-  departementCache = listeTemporaire[nombreHasard];
-  console.log(departementCache);
-  zoneAffichage.innerHTML = departementCache;
+  // Permet de choisir un département au hasard pour le mode de jeu "trouve le département"
+  if (jeuLance === true) {
+    nombreHasard = getRandomInt(listeTemporaire.length);
+    console.log(nombreHasard);
+    departementCache = listeTemporaire[nombreHasard];
+    console.log(departementCache);
+    zoneAffichage.innerHTML = departementCache;
+  }
 }
 
 function verifChoixJoueur(cliqueJoueur) {
+  //permet de vérifier le choix des joueurs pour le jeu "trouve le département"
   console.log(cliqueJoueur);
   if (cliqueJoueur === departementCache && jeuLance === true) {
     score++;
@@ -75,37 +85,37 @@ function verifChoixJoueur(cliqueJoueur) {
     departementAColore = document.getElementById(departementCache);
     departementAColore.style.fill = "green";
     listeTemporaire.splice(nombreHasard, 1);
-    nouvelleManche();
+    departementAuHasard();
     // lancerJeu();
   } else if (cliqueJoueur != departementCache && jeuLance === true) {
     departementAColore = document.getElementById(departementCache);
     departementAColore.style.fill = "red";
     listeTemporaire.splice(nombreHasard, 1);
-    nouvelleManche();
+    departementAuHasard();
     // lancerJeu();
   }
 }
 
 function verifFinDeJeu() {
-  if (listeTemporaire.length === 0) {
+  //vérifie si tous les départements de la liste temporaire ont été utilisé dans le jeu
+  if (listeTemporaire.length === 0 && jeuLance === true) {
     zoneAffichage.innerText = `Félicitations tu as finis le jeu avec un score de ${score}/97 ! Recharge la page pour rejouer`;
     stopChrono();
   }
 }
 
-function nouvelleManche() {
-  departementAuHasard();
-}
-
-function lancerJeu() {
-  rechargementListes();
-  departementAuHasard();
-  jeuLance = true;
-}
+// function lancerJeu() {
+//   rechargementListes();
+//   departementAuHasard();
+//   jeuLance = true;
+// }
 
 btnLancerLeJeu.addEventListener("click", () => {
+  //lance le jeu "trouve le département"
   aideAffiche = false;
-  lancerJeu();
+  jeuLance = true;
+  btnLancerLeJeu.style.display = "none";
+  departementAuHasard();
   demarrerChrono();
 });
 
@@ -180,11 +190,44 @@ for (let i = 0; i < carteCliquable.length; i++) {
       infoPrefecture = carteCliquable[i].getAttribute("prefecture");
       espaceInfoPrefecture.innerHTML = infoPrefecture;
       bulleInfo.style.display = "inline";
-      bulleInfo.style.left = e.pageX + 1 + "px";
-      bulleInfo.style.top = e.pageY + 1 + "px";
+      bulleInfo.style.left = e.clientX + 1 + "px"; // clientX/Y mieux que pageX/Y pour gérer le scroll de la page
+      bulleInfo.style.top = e.clientY + 1 + "px";
     }
   });
   carteCliquable[i].addEventListener("mouseout", () => {
     bulleInfo.style.display = "none";
   });
 }
+
+btnsAccueil.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    minutes = 0;
+    secondes = 0;
+    heures = 0;
+    timeout;
+    estArrete = true;
+    chrono.textContent = `${heures}:${minutes}:${secondes}`;
+    zoneAffichage.innerHTML = "";
+    score = 0;
+    zoneScore.innerHTML = score;
+    jeuLance = false;
+    aideAffiche = true;
+    if (choixModeDeJeu === "trouve") {
+      chrono.style.display = "none";
+      consigne.style.display = "none";
+      btnLancerLeJeu.style.display = "none";
+      modeDeJeu.style.display = "inline";
+    } else if (choixModeDeJeu === "QCM") {
+      aideAffiche = false;
+      zoneQuestionQCM.style.display = "none";
+      modeDeJeu.style.display = "inline";
+      listeNombresInterdits = [];
+    }
+    AllDepartements.forEach((element) => {
+      element.style.fill = "#ff8c00";
+    });
+    modeDeJeu.value = "choix";
+  });
+});
+
+const AllDepartements = document.querySelectorAll("path[numero]");
