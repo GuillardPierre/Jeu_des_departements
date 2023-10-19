@@ -56,9 +56,8 @@ function elementEstDansTableau(nombre, tableau) {
 
 function lancementQCM() {
   if (listeNombresInterdits.length === 96) {
-    alert(
-      `Bravo, votre score est de ${score}/97 ! Rechargez la page pour rejouer.`
-    );
+    let message = `Bravo, votre score est de ${score}/97 !`;
+    popupMessage.innerHTML = message;
     zoneQuestionQCM.style.display = "none";
   } else {
     nombreAuPif = nombreAuPifSansInterdit(
@@ -141,7 +140,6 @@ let choixJoueurDepartement = "";
 let choixJoueurNumero = "";
 let choixJoueurPrefecture = "";
 
-// function verifChoixJoueur () {}
 btnEnvoyerReponse.addEventListener("click", () => {
   for (let i = 0; i < btnDepartement.length; i++) {
     if (btnDepartement[i].checked === true) {
@@ -184,9 +182,9 @@ function verifChoixJoueurQCM() {
     paireNumeroTrouvee === false ||
     pairePrefectureTrouvee === false
   ) {
-    alert(
-      `La bonne réponse était département : ${departementATrouver}, numéro : ${numeroATrouver} et préfecture : ${prefectureATrouver}`
-    );
+    let message = `La bonne réponse était département : ${departementATrouver}, numéro : ${numeroATrouver} et préfecture : ${prefectureATrouver}`;
+    popupMessage.innerHTML = message;
+    popup.style.display = "inline";
   }
   if (point >= 2) {
     for (let i = 0; i < listeTemporaire.length; i++) {

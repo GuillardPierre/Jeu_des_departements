@@ -7,6 +7,8 @@ let consigne = document.getElementById("consigne");
 let modeDeJeu = document.getElementById("menuDeroulant");
 let btnsAccueil = document.querySelectorAll(".retourAccueil");
 let popup = document.querySelector(".popup");
+let popupMessage = document.querySelector(".popup p");
+let btnOk = document.querySelector(".ok");
 let departementCache = "";
 let departementAColore = "";
 let choixModeDeJeu = "";
@@ -43,6 +45,7 @@ modeDeJeu.addEventListener("change", (e) => {
     consigne.style.display = "inline";
     btnLancerLeJeu.style.display = "inline";
     modeDeJeu.style.display = "none";
+    aideAffiche = false;
     rechargementListes();
   } else if (choixModeDeJeu === "QCM") {
     rechargementListes();
@@ -50,6 +53,9 @@ modeDeJeu.addEventListener("change", (e) => {
     zoneQuestionQCM.style.display = "inline";
     modeDeJeu.style.display = "none";
     lancementQCM();
+  } else if (choixModeDeJeu === choix) {
+    btnsAccueil.style.display = "none";
+    aideAffiche = true;
   }
 });
 
@@ -99,7 +105,9 @@ function verifChoixJoueur(cliqueJoueur) {
 function verifFinDeJeu() {
   //vérifie si tous les départements de la liste temporaire ont été utilisé dans le jeu
   if (listeTemporaire.length === 0 && jeuLance === true) {
-    zoneAffichage.innerText = `Félicitations tu as finis le jeu avec un score de ${score}/97 ! Recharge la page pour rejouer`;
+    let message = `Félicitations tu as finis le jeu avec un score de ${score}/97 ! Recharge la page pour rejouer`;
+    popupMessage.innerHTML = message;
+    popup.style.display = "inline";
     stopChrono();
   }
 }
@@ -112,7 +120,6 @@ function verifFinDeJeu() {
 
 btnLancerLeJeu.addEventListener("click", () => {
   //lance le jeu "trouve le département"
-  aideAffiche = false;
   jeuLance = true;
   btnLancerLeJeu.style.display = "none";
   departementAuHasard();
@@ -201,6 +208,9 @@ for (let i = 0; i < carteCliquable.length; i++) {
 
 btnsAccueil.forEach((btn) => {
   btn.addEventListener("click", () => {
+    if ((popup.style.display = "inline")) {
+      popup.style.display = "none";
+    }
     minutes = 0;
     secondes = 0;
     heures = 0;
@@ -211,17 +221,18 @@ btnsAccueil.forEach((btn) => {
     score = 0;
     zoneScore.innerHTML = score;
     jeuLance = false;
-    aideAffiche = true;
     if (choixModeDeJeu === "trouve") {
       chrono.style.display = "none";
       consigne.style.display = "none";
       btnLancerLeJeu.style.display = "none";
       modeDeJeu.style.display = "inline";
+      aideAffiche = true;
     } else if (choixModeDeJeu === "QCM") {
       aideAffiche = false;
       zoneQuestionQCM.style.display = "none";
       modeDeJeu.style.display = "inline";
       listeNombresInterdits = [];
+      aideAffiche = true;
     }
     AllDepartements.forEach((element) => {
       element.style.fill = "#ff8c00";
@@ -230,4 +241,14 @@ btnsAccueil.forEach((btn) => {
   });
 });
 
+btnOk.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
 const AllDepartements = document.querySelectorAll("path[numero]");
+
+document.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    popup.style.display = "none";
+  }
+});
