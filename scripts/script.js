@@ -214,7 +214,7 @@ btnsAccueil.addEventListener("click", () => {
   heures = 0;
   timeout;
   estArrete = true;
-  chrono.textContent = `${heures}:${minutes}:${secondes}`;
+  chrono.textContent = `00:00:00`;
   zoneAffichage.innerHTML = "";
   score = 0;
   zoneScore.innerHTML = score;
@@ -244,10 +244,11 @@ btnOk.addEventListener("click", () => {
 
 const AllDepartements = document.querySelectorAll("path[numero]");
 
-// document.addEventListener("keydown", function (event) {
-//   if (event.keyCode === 13) {
-//     popup.style.display = "none";
-//   }
-// });
+document.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    popup.style.display = "none";
+  }
+});
 
 //bug lors du QCM = si appuie sur enter la popup ne disparait pas et à la place il valide le QCM suivant.
