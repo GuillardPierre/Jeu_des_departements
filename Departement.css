@@ -1,16 +1,20 @@
 path {
-  fill: #ff8c00;
-  stroke: #34344a;
+	fill: #ff8c00;
+	stroke: #34344a;
 }
 
 path:hover {
-  fill: #b33f62;
-  cursor: pointer;
+	fill: #b33f62;
+	cursor: pointer;
 }
 
 * {
-  color: whitesmoke;
-  font-family: "Inter", sans-serif;
+	color: whitesmoke;
+	font-family: 'Inter', sans-serif;
+}
+
+main {
+	margin-top: 150px;
 }
 
 #zoneAffichage,
@@ -21,103 +25,103 @@ footer,
 #affichageScore,
 body,
 button {
-  text-align: center;
-  background-color: #3891a6;
+	text-align: center;
+	background-color: #3891a6;
 }
 
 select,
 option {
-  color: #34344a;
+	color: #34344a;
 }
 
 #carteGlobale {
-  width: 800px;
-  display: flex;
-  justify-content: center;
+	width: 800px;
+	display: flex;
+	justify-content: center;
 }
 
 #carteGlobale {
-  border: 2px solid;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px auto;
+	border: 2px solid;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px auto;
 }
 
 #zoneScore {
-  font-size: 300%;
+	font-size: 300%;
 }
 
 #questionDepartement,
 #questionNumero,
 #questionPrefecture {
-  display: grid;
-  grid-template-columns: repeat(3, 20%); /* Trois colonnes de largeur égale */
-  grid-template-rows: 1fr;
-  row-gap: 10px;
-  justify-content: center; /* Centrer les colonnes horizontalement */
+	display: grid;
+	grid-template-columns: repeat(3, 20%); /* Trois colonnes de largeur égale */
+	grid-template-rows: 1fr;
+	row-gap: 10px;
+	justify-content: center; /* Centrer les colonnes horizontalement */
 }
 
 #bulleInfo {
-  background-color: #b33f62;
-  display: none;
-  position: fixed;
-  border: 2px solid;
-  border-radius: 10px;
-  padding-right: 10px;
-  padding-left: -5px;
-  margin-left: 15px;
-  z-index: 1;
+	background-color: #b33f62;
+	display: none;
+	position: fixed;
+	border: 2px solid;
+	border-radius: 10px;
+	padding-right: 10px;
+	padding-left: -5px;
+	margin-left: 15px;
+	z-index: 1;
 }
 
 #questions {
-  width: 900px;
-  border: 2px solid;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 10px auto;
+	width: 900px;
+	border: 2px solid;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 10px auto;
 }
 
 #zoneQCM {
-  display: none;
+	display: none;
 }
 
 #consigne {
-  font-size: larger;
-  font-weight: bold;
-  color: #b33f62;
+	font-size: larger;
+	font-weight: bold;
+	color: #b33f62;
 }
 
 .popup {
-  background-color: #3891a6;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  position: absolute;
-  width: 300px;
-  height: 150px;
-  border: 2px solid;
-  border-radius: 10px;
+	background-color: #3891a6;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	position: absolute;
+	width: 300px;
+	height: 150px;
+	border: 2px solid;
+	border-radius: 10px;
 }
 
 .popup p {
-  padding-top: 20px;
+	padding-top: 20px;
 }
 
 .popup button {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 button {
-  border-radius: 10px;
-  padding: 5px;
-  border: 2px solid;
+	border-radius: 10px;
+	padding: 5px;
+	border: 2px solid;
 }
 
 button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 #btnEnvoyerReponse {
-  margin-top: 10px;
+	margin-top: 10px;
 }
